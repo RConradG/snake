@@ -1,12 +1,29 @@
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   background-color: gray;
-  /* Use a system font; if none are available, use an available sans-serif font */
-  font-family: system-ui, sans-serif;
-  /* Ensures full height compatibility across devices */
-  min-height: 100dvh;
-  margin: 0;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);  
+  width: 400px;
+  height: 400px;
+  gap: 1px; 
+  background-color: black; 
+}
+
+.cell {
+  background-color: yellow;
+  aspect-ratio: 1 / 1; 
 }

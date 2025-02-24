@@ -1,18 +1,28 @@
 /*-------------- Constants -------------*/
-let FOOD
- 
- 
+const FOOD;
+const DEFAULT_BOARD_SIZE = 20 * 20;
+
+
+
 /*---------- Variables (state) ---------*/
 // Time/Timer
 // Score
 let snake;
+let boardRows;
+let boardColumns;
  
- 
-/*----- Cached Element References  -----*/
+ /*----- Cached Element References  -----*/
  
 // querySelect start game button
+const gameBoard = document.querySelector(".game-board");
  
 /*-------------- Functions -------------*/
+
+for (let i = 0; i < boardSize; i++) {
+  const cell = document.createElement("div");
+  cell.classList.add("cell");
+  gameBoard.appendChild(cell);
+}
  
 // growSnake:
 // Grow snake once food is eaten
@@ -65,3 +75,4 @@ let snake;
 // • Figure out how to set a timer
 // • Figure out how to end game when timer ends
 // Figure out how to reset time when food is eaten
+
