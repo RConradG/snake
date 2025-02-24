@@ -1,0 +1,12 @@
+* {
+  box-sizing: border-box
+}
+
+body {
+  background-color: gray;
+  /* Use a system font; if none are available, use an available sans-serif font */
+  font-family: system-ui, sans-serif;
+  /* Ensures full height compatibility across devices */
+  min-height: 100dvh;
+  margin: 0;
+}
