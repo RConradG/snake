@@ -5,7 +5,8 @@ const DEFAULT_BOARD_SIZE = 20 * 20;
 /*---------- Variables (state) ---------*/
 // Time/Timer
 // Score
-let food = [ {foodX: 0, foodY: 0 } ]
+let food;
+let snake;
 let snakeLocation = [{ x: 10, y: 10 }];
 let boardRows = 20;
 let boardColumns = 20;
@@ -14,32 +15,38 @@ let boardColumns = 20;
  
 // querySelect start game button
 const gameBoard = document.querySelector(".game-board");
-createGameBoard();
+
 const cells = document.querySelectorAll(".cell");
 
 /*-------------- Functions -------------*/
+render();
 
 function render() {
-  cells.forEach(cell => cell.classList.remove("snake"));
-
-  snakeLocation.forEach(snakeBody => {
-    const index = snakeBody.y + snakeBody.x;
-    cells[index].classList.add("snake");
-  });
+  createGameBoard();
+  setFood();
+  setSnake();
 };
- 
-// render();
 
 function createGameBoard () {
   for (let i = 0; i < boardRows * boardColumns; i++) {
     const boardCell = document.createElement("div");
     boardCell.setAttribute("class", "cell")
-    boardCell.setAttribute("id",`${i}`)
+    boardCell.id = `cell-${i}`;
     console.log(boardCell);
     gameBoard.appendChild(boardCell);
   }
 };
 
+function setFood() {
+  food = document.getElementById("cell-38");
+  // food.setAttribute("class", "food");
+  food.classList.add("food") // maybe use?
+}
+
+function setSnake() {
+  snake = document.getElementById("cell-268");
+  snake.setAttribute("class", "snake");
+}
 // growSnake:
 // Grow snake once food is eaten
  
