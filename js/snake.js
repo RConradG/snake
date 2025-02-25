@@ -1,7 +1,7 @@
 /*-------------- Constants -------------*/
 const boardRows = 30;
 const boardColumns = 30;
-const tileSize = 25;
+const tileSize = 40;
 let board;
 /*---------- Variables (state) ---------*/
 // Time/Timer
@@ -51,21 +51,22 @@ function update() {
   fillGameBoard();
   fillFood();
   fillSnake();
+  addSnakeBody();
   }
 }
 
 function moveSnake(event) {
   if (event.code === "ArrowUp") {
     snakeMovement.x = 0;
-    snakeMovement.y = -10;
+    snakeMovement.y = -1;
   } else if (event.code === "ArrowDown") {
     snakeMovement.x = 0;
-    snakeMovement.y = 10;
+    snakeMovement.y = 1;
   } else if (event.code === "ArrowLeft") {
-    snakeMovement.x = -10;
+    snakeMovement.x = -1;
     snakeMovement.y = 0;
   } else if (event.code === "ArrowRight") {
-    snakeMovement.x = 10;
+    snakeMovement.x = 1;
     snakeMovement.y = 0;
   }
 }
@@ -99,8 +100,8 @@ function setSnake() {
 
 function fillSnake() {
   boardContextEl.fillStyle = "green";
-  snake.x += snakeMovement.x;
-  snake.y += snakeMovement.y;
+  snake.x += snakeMovement.x * tileSize;
+  snake.y += snakeMovement.y * tileSize;
   boardContextEl.fillRect(snake.x, snake.y, tileSize, tileSize);
 }
 
@@ -109,6 +110,14 @@ function getRandomLocation() {
   location.x = Math.floor(Math.random() * boardColumns) * tileSize;
   location.y = Math.floor(Math.random() * boardRows) * tileSize;
   return location;
+}
+
+function addSnakeBody() {
+  if (snake.x === food.x && snake.y === food.y) {
+    snakeBody.push([food.x, food.y]);
+    setFood();
+    fillFood();
+  }
 }
 
 // function setFood() {
@@ -145,10 +154,8 @@ function getRandomLocation() {
 // render():
 // Will start and restart game
 
-// • Figure out how to move Snake
 // • Figure out how to end game when snake hits wall
 // • Figure out how to end game when snake eats itself
-// • Figure out how to move snake to food
 // • Figure out how to grow snake after eating
 // • Figure out how to make food disappear when snake eats food
 // • Figure out how to randomly place food on grid
