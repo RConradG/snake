@@ -1,52 +1,60 @@
 /*-------------- Constants -------------*/
-const DEFAULT_BOARD_SIZE = 20 * 20;
-
-
+const boardRows = 20;
+const boardColumns = 20;
+const tileSize = 30;
+let context;
+let board;
 /*---------- Variables (state) ---------*/
 // Time/Timer
 // Score
+
 let food;
 let snake;
 let snakeLocation = [{ x: 10, y: 10 }];
-let boardRows = 20;
-let boardColumns = 20;
+
  
  /*----- Cached Element References  -----*/
  
 // querySelect start game button
-const gameBoard = document.querySelector(".game-board");
-
-const cells = document.querySelectorAll(".cell");
+const gameBoard = document.getElementById("board");
+// const cells = document.querySelectorAll(".cell");
 
 /*-------------- Functions -------------*/
 render();
+// window.onload = function() {
+  
+//   update();
+  
+// }
+
+function update() {
+}
 
 function render() {
   createGameBoard();
-  setFood();
-  setSnake();
+  // setFood();
+  // setSnake();
 };
+
 
 function createGameBoard () {
-  for (let i = 0; i < boardRows * boardColumns; i++) {
-    const boardCell = document.createElement("div");
-    boardCell.setAttribute("class", "cell")
-    boardCell.id = `cell-${i}`;
-    console.log(boardCell);
-    gameBoard.appendChild(boardCell);
-  }
-};
-
-function setFood() {
-  food = document.getElementById("cell-38");
-  // food.setAttribute("class", "food");
-  food.classList.add("food") // maybe use?
+  gameBoard.height = tileSize * boardRows;
+  gameBoard.width = tileSize * boardColumns
+  context = gameBoard.getContext("2d")
+  context.fillStyle = "black";
+  context.fillRect(0, 0, gameBoard.width, gameBoard.height);
 }
 
-function setSnake() {
-  snake = document.getElementById("cell-268");
-  snake.setAttribute("class", "snake");
-}
+// function setFood() {
+//   food = document.getElementById("cell-38");
+//   // food.setAttribute("class", "food");
+//   food.classList.add("food") // maybe use?
+// }
+
+// function setSnake() {
+//   snake = cells[3];
+//   snake.setAttribute("class", "snake");
+// }
 // growSnake:
 // Grow snake once food is eaten
  
