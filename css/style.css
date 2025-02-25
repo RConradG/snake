@@ -15,20 +15,25 @@ body {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(40, 1fr);
-  grid-template-rows: repeat(40, 1fr);  
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);  
   width: 800px;
   height: 800px;
-  gap: 1px; 
+  gap: 1px; /**/
   background-color: black; 
 }
 
 .cell {
-  background-color: yellow;
-  aspect-ratio: 1 / 1; 
+  background-color: rgba(238, 227, 67, 0.884);
+  /* aspect-ratio: 1 / 4; */
 }
 
 .snake {
-  background-color: rgba(255, 255, 0, 0.627);
+  background-color: rgba(0, 255, 8, 0.627);
   aspect-ratio: 1 / 1;
+}
+
+.food {
+  background-color: yellow;
+  border-radius: 50%;
 }

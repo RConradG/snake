@@ -6,9 +6,9 @@ const DEFAULT_BOARD_SIZE = 20 * 20;
 // Time/Timer
 // Score
 let food = [ {foodX: 0, foodY: 0 } ]
-let snakeLocation = [{ x: 10, y: 10 };
-let boardRows;
-let boardColumns;
+let snakeLocation = [{ x: 10, y: 10 }];
+let boardRows = 20;
+let boardColumns = 20;
  
  /*----- Cached Element References  -----*/
  
@@ -31,9 +31,11 @@ function render() {
 // render();
 
 function createGameBoard () {
-  for (let i = 0; i < DEFAULT_BOARD_SIZE; i++) {
+  for (let i = 0; i < boardRows * boardColumns; i++) {
     const boardCell = document.createElement("div");
-    boardCell.classList.add("cell");
+    boardCell.setAttribute("class", "cell")
+    boardCell.setAttribute("id",`${i}`)
+    console.log(boardCell);
     gameBoard.appendChild(boardCell);
   }
 };
@@ -89,4 +91,3 @@ function createGameBoard () {
 // • Figure out how to set a timer
 // • Figure out how to end game when timer ends
 // Figure out how to reset time when food is eaten
-
