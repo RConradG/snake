@@ -1,13 +1,12 @@
 /*-------------- Constants -------------*/
-const FOOD;
 const DEFAULT_BOARD_SIZE = 20 * 20;
-
 
 
 /*---------- Variables (state) ---------*/
 // Time/Timer
 // Score
-let snake;
+let food = [ {foodX: 0, foodY: 0 } ]
+let snakeLocation = [{ x: 10, y: 10 };
 let boardRows;
 let boardColumns;
  
@@ -15,15 +14,30 @@ let boardColumns;
  
 // querySelect start game button
 const gameBoard = document.querySelector(".game-board");
- 
+createGameBoard();
+const cells = document.querySelectorAll(".cell");
+
 /*-------------- Functions -------------*/
 
-for (let i = 0; i < boardSize; i++) {
-  const cell = document.createElement("div");
-  cell.classList.add("cell");
-  gameBoard.appendChild(cell);
-}
+function render() {
+  cells.forEach(cell => cell.classList.remove("snake"));
+
+  snakeLocation.forEach(snakeBody => {
+    const index = snakeBody.y + snakeBody.x;
+    cells[index].classList.add("snake");
+  });
+};
  
+// render();
+
+function createGameBoard () {
+  for (let i = 0; i < DEFAULT_BOARD_SIZE; i++) {
+    const boardCell = document.createElement("div");
+    boardCell.classList.add("cell");
+    gameBoard.appendChild(boardCell);
+  }
+};
+
 // growSnake:
 // Grow snake once food is eaten
  

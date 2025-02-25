@@ -10,15 +10,15 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: gray;
+  background-color: white;
 }
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(20, 1fr);  
-  width: 400px;
-  height: 400px;
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(40, 1fr);  
+  width: 800px;
+  height: 800px;
   gap: 1px; 
   background-color: black; 
 }
@@ -26,4 +26,9 @@ body {
 .cell {
   background-color: yellow;
   aspect-ratio: 1 / 1; 
+}
+
+.snake {
+  background-color: rgba(255, 255, 0, 0.627);
+  aspect-ratio: 1 / 1;
 }
