@@ -11,6 +11,7 @@ APPLE_IMAGE.src = "./resources/pictures/apple.jpg";
 
 const SNAKE_IMAGE = new Image();
 SNAKE_IMAGE.src = "./resources/pictures/snake-head.jpeg";
+
 // /*---------- Variables (state) ---------*/
 
 //snake head
@@ -22,7 +23,6 @@ let food = { x: 0, y: 0 };
 
 let gameOver = false;
 let gameInterval;
-// let restart = false;
 
 // /*----- Cached Element References  -----*/
 
@@ -30,6 +30,7 @@ const gameBoardEl = document.getElementById("board");
 
 // allows for drawing on the canvas HTML element
 const gameBoardContextEl = gameBoardEl.getContext("2d");
+
 const resetButtonEl = document.getElementById("reset-button")
 
 // /*----------- Event Listeners ----------*/
@@ -51,6 +52,7 @@ function update() {
   if (gameOver) {
     return;
   }
+  
   fillGameBoard();
   fillFood();
   checkFoodAndSnake();
@@ -59,19 +61,9 @@ function update() {
   checkForGameOverConditions();
 }
 
-function resetGame() {
-  snake = setSnake();
-  snakeBody = [];
-  snakeVelocity = { x: 0, y: 0 };
-  food = { x: 0, y: 0 };
-  gameOver = false;
-  clearInterval(gameInterval);
-  render();
-}
-
-function setSnake() {
-  let snakeLocation = {x: pickRandomNumbers().x, y: pickRandomNumbers().y};
-  return snakeLocation;
+function createGameBoard() {
+  gameBoardEl.height = ROWS * TILE_SIZE;
+  gameBoardEl.width = COLUMNS * TILE_SIZE;
 }
 
 function fillGameBoard() {
@@ -79,9 +71,9 @@ function fillGameBoard() {
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
 }
 
-function createGameBoard() {
-  gameBoardEl.height = ROWS * TILE_SIZE;
-  gameBoardEl.width = COLUMNS * TILE_SIZE;
+function setFood() {
+  food.x = pickRandomNumbers().x;
+  food.y = pickRandomNumbers().y;
 }
 
 function fillFood() {
@@ -93,16 +85,6 @@ function fillFood() {
     TILE_SIZE,
     TILE_SIZE
   );
-}
-
-function showGameOverMessage() {
-  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent background
-  gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
-
-  gameBoardContextEl.fillStyle = "white";
-  gameBoardContextEl.font = "26px Arial";
-  gameBoardContextEl.textAlign = "center";
-  gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
 }
 
 function checkFoodAndSnake() {
@@ -143,6 +125,31 @@ function fillSnakeBody() {
     gameBoardContextEl.fill();
   }
   
+}
+
+function resetGame() {
+  snake = setSnake();
+  snakeBody = [];
+  snakeVelocity = { x: 0, y: 0 };
+  food = { x: 0, y: 0 };
+  gameOver = false;
+  clearInterval(gameInterval);
+  render();
+}
+
+function setSnake() {
+  let snakeLocation = {x: pickRandomNumbers().x, y: pickRandomNumbers().y};
+  return snakeLocation;
+}
+
+function showGameOverMessage() {
+  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent background
+  gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
+
+  gameBoardContextEl.fillStyle = "white";
+  gameBoardContextEl.font = "26px Arial";
+  gameBoardContextEl.textAlign = "center";
+  gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
 }
 
 function checkForGameOverConditions() {
@@ -195,7 +202,3 @@ function pickRandomNumbers() {
   return randomNumbers;
 }
 
-function setFood() {
-  food.x = pickRandomNumbers().x;
-  food.y = pickRandomNumbers().y;
-}
