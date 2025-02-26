@@ -13,7 +13,7 @@ SNAKE_IMAGE.src = "./resources/pictures/snake-head.jpeg";
 // /*---------- Variables (state) ---------*/
 
 //snake head
-let snake = { x: TILE_SIZE * 5, y: TILE_SIZE * 5 };
+let snake = setSnake();
 let snakeBody = [];
 
 let snakeVelocity = { x: 0, y: 0 };
@@ -40,7 +40,7 @@ document.addEventListener("click", resetGame)
 render();
 
 function render() {
-  createBoard();
+  createGameBoard();
   setFood();
   gameInterval = setInterval(update, 1000 / 10);
 }
@@ -49,7 +49,7 @@ function update() {
   if (gameOver) {
     return;
   }
-  fillBoard();
+  fillGameBoard();
   fillFood();
   checkFoodAndSnake();
   addSnakeBody();
@@ -58,22 +58,26 @@ function update() {
 }
 
 function resetGame() {
-  snake = {x: 0, y: 0};
+  snake = setSnake();
   snakeBody = [];
   snakeVelocity = { x: 0, y: 0 };
   food = { x: 0, y: 0 };
-  
   gameOver = false;
   clearInterval(gameInterval);
   render();
 }
 
-function fillBoard() {
+function setSnake() {
+  let snakeLocation = {x: pickRandomNumbers().x, y: pickRandomNumbers().y};
+  return snakeLocation;
+}
+
+function fillGameBoard() {
   gameBoardContextEl.fillStyle = "#1B1B1B";
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
 }
 
-function createBoard() {
+function createGameBoard() {
   gameBoardEl.height = ROWS * TILE_SIZE;
   gameBoardEl.width = COLUMNS * TILE_SIZE;
 }
@@ -127,13 +131,16 @@ function fillSnakeBody() {
     TILE_SIZE
   );
   for (let i = 0; i < snakeBody.length; i++) {
-    gameBoardContextEl.fillRect(
-      snakeBody[i][0],
-      snakeBody[i][1],
-      TILE_SIZE,
-      TILE_SIZE
-    ); 
+    gameBoardContextEl.beginPath();
+    gameBoardContextEl.arc(
+      snakeBody[i][0] + TILE_SIZE / 2,  // Center X
+      snakeBody[i][1] + TILE_SIZE / 2,  // Center Y
+      TILE_SIZE / 2,  // Radius
+      0, Math.PI * 2  // Full circle
+    );
+    gameBoardContextEl.fill();
   }
+  
 }
 
 function checkForGameOverConditions() {
@@ -159,7 +166,6 @@ function checkForGameOverConditions() {
 
 function stopGame() {
   snake = {};
-
 }
 
 function moveSnake(e) {
@@ -180,8 +186,14 @@ function moveSnake(e) {
   }
 }
 
+function pickRandomNumbers() {
+  let randomNumbers = {x: 0, y: 0};
+  randomNumbers.x = Math.floor(Math.random() * COLUMNS) * TILE_SIZE;
+  randomNumbers.y = Math.floor(Math.random() * ROWS) * TILE_SIZE;
+  return randomNumbers;
+}
+
 function setFood() {
-  //(0-1) * cols -> (0-19.9999) -> (0-19) * 25
-  food.x = Math.floor(Math.random() * COLUMNS) * TILE_SIZE;
-  food.y = Math.floor(Math.random() * ROWS) * TILE_SIZE;
+  food.x = pickRandomNumbers().x;
+  food.y = pickRandomNumbers().y;
 }
