@@ -1,8 +1,9 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 8px;
 }
+
 
 body {
   display: flex;
@@ -13,8 +14,18 @@ body {
   background-color: white;
 }
 
+#board {
+  border-radius: 30px;
+}
+
 #game-status {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+#reset-button {
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 15px 32px;
 }

@@ -1,20 +1,27 @@
 // /*-------------- Constants -------------*/
 
 //board
-const ROWS = 35;
-const COLUMNS = 35;
-const TILE_SIZE = 25;
+const ROWS = 20;
+const COLUMNS = 20;
+const TILE_SIZE = 40;
 
+const APPLE_IMAGE = new Image();
+APPLE_IMAGE.src = "./resources/pictures/apple.jpg";
+
+const SNAKE_IMAGE = new Image();
+SNAKE_IMAGE.src = "./resources/pictures/snake-head.jpeg";
 // /*---------- Variables (state) ---------*/
 
 //snake head
-let snake = {x: TILE_SIZE * 5, y: TILE_SIZE * 5}
+let snake = { x: TILE_SIZE * 5, y: TILE_SIZE * 5 };
 let snakeBody = [];
 
-let snakeVelocity = {x: 0, y: 0}
-let food = {x: 0, y: 0}
+let snakeVelocity = { x: 0, y: 0 };
+let food = { x: 0, y: 0 };
 
 let gameOver = false;
+let gameInterval;
+// let restart = false;
 
 // /*----- Cached Element References  -----*/
 
@@ -25,14 +32,18 @@ const gameBoardContextEl = gameBoardEl.getContext("2d");
 
 // /*----------- Event Listeners ----------*/
 document.addEventListener("keyup", moveSnake);
+document.addEventListener("click", resetGame)
+
+
+// /*------------- Functions --------------*/
 
 render();
 
 function render() {
   createBoard();
   setFood();
-  setInterval(update, 1000 / 10); 
-};
+  gameInterval = setInterval(update, 1000 / 10);
+}
 
 function update() {
   if (gameOver) {
@@ -44,11 +55,21 @@ function update() {
   addSnakeBody();
   fillSnakeBody();
   checkForGameOverConditions();
+}
 
+function resetGame() {
+  snake = {x: 0, y: 0};
+  snakeBody = [];
+  snakeVelocity = { x: 0, y: 0 };
+  food = { x: 0, y: 0 };
+  
+  gameOver = false;
+  clearInterval(gameInterval);
+  render();
 }
 
 function fillBoard() {
-  gameBoardContextEl.fillStyle = "blue";
+  gameBoardContextEl.fillStyle = "#1B1B1B";
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
 }
 
@@ -59,7 +80,23 @@ function createBoard() {
 
 function fillFood() {
   gameBoardContextEl.fillStyle = "red";
-  gameBoardContextEl.fillRect(food.x, food.y, TILE_SIZE, TILE_SIZE);
+  gameBoardContextEl.drawImage(
+    APPLE_IMAGE,
+    food.x,
+    food.y,
+    TILE_SIZE,
+    TILE_SIZE
+  );
+}
+
+function showGameOverMessage() {
+  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent background
+  gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
+
+  gameBoardContextEl.fillStyle = "white";
+  gameBoardContextEl.font = "30px Arial";
+  gameBoardContextEl.textAlign = "center";
+  gameBoardContextEl.fillText("Game Over!", gameBoardEl.width / 2, gameBoardEl.height / 2);
 }
 
 function checkFoodAndSnake() {
@@ -79,42 +116,54 @@ function addSnakeBody() {
 }
 
 function fillSnakeBody() {
-  gameBoardContextEl.fillStyle = "black";
+  gameBoardContextEl.fillStyle = "#FFDD44";
   snake.x += snakeVelocity.x * TILE_SIZE;
   snake.y += snakeVelocity.y * TILE_SIZE;
-  gameBoardContextEl.fillRect(snake.x, snake.y, TILE_SIZE, TILE_SIZE);
+  gameBoardContextEl.drawImage(
+    SNAKE_IMAGE,
+    snake.x,
+    snake.y,
+    TILE_SIZE,
+    TILE_SIZE
+  );
   for (let i = 0; i < snakeBody.length; i++) {
     gameBoardContextEl.fillRect(
       snakeBody[i][0],
       snakeBody[i][1],
       TILE_SIZE,
       TILE_SIZE
-    );
+    ); 
   }
 }
 
 function checkForGameOverConditions() {
   if (
     snake.x < 0 ||
-    snake.x > COLUMNS * TILE_SIZE ||
+    snake.x >= COLUMNS * TILE_SIZE ||
     snake.y < 0 ||
-    snake.y > ROWS * TILE_SIZE
+    snake.y >= ROWS * TILE_SIZE
   ) {
     gameOver = true;
-    alert("Game Over");
+    stopGame();
+    showGameOverMessage();
   }
   // checks if snake eats itself
-  for (let i = 0; i < snakeBody.length; i++) { 
+  for (let i = 0; i < snakeBody.length; i++) {
     if (snake.x == snakeBody[i][0] && snake.y == snakeBody[i][1]) {
       gameOver = true;
-      alert("Game Over");
+      stopGame();
+      showGameOverMessage();
     }
   }
+}
+
+function stopGame() {
+  snake = {};
 
 }
 
 function moveSnake(e) {
-  // && snakeVelocity statement checks to 
+  // && snakeVelocity statement checks to
   // ensure snake doesn't eat itself
   if (e.code == "ArrowUp" && snakeVelocity.y != 1) {
     snakeVelocity.x = 0;
@@ -136,4 +185,3 @@ function setFood() {
   food.x = Math.floor(Math.random() * COLUMNS) * TILE_SIZE;
   food.y = Math.floor(Math.random() * ROWS) * TILE_SIZE;
 }
-
