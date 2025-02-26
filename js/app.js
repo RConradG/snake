@@ -31,9 +31,9 @@ const gameBoardEl = document.getElementById("board");
 const gameBoardContextEl = gameBoardEl.getContext("2d");
 
 // /*----------- Event Listeners ----------*/
+
 document.addEventListener("keyup", moveSnake);
 document.addEventListener("click", resetGame)
-
 
 // /*------------- Functions --------------*/
 
