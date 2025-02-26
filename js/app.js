@@ -1,9 +1,10 @@
 // /*-------------- Constants -------------*/
 
 //board
-const ROWS = 20;
-const COLUMNS = 20;
+const ROWS = 15;
+const COLUMNS = 15;
 const TILE_SIZE = 40;
+const RESET_GAME_MESSAGE = `Game Over! Play again? Click reset button.`
 
 const APPLE_IMAGE = new Image();
 APPLE_IMAGE.src = "./resources/pictures/apple.jpg";
@@ -29,11 +30,12 @@ const gameBoardEl = document.getElementById("board");
 
 // allows for drawing on the canvas HTML element
 const gameBoardContextEl = gameBoardEl.getContext("2d");
+const resetButtonEl = document.getElementById("reset-button")
 
 // /*----------- Event Listeners ----------*/
 
 document.addEventListener("keyup", moveSnake);
-document.addEventListener("click", resetGame)
+resetButtonEl.addEventListener("click", resetGame)
 
 // /*------------- Functions --------------*/
 
@@ -98,9 +100,9 @@ function showGameOverMessage() {
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
 
   gameBoardContextEl.fillStyle = "white";
-  gameBoardContextEl.font = "30px Arial";
+  gameBoardContextEl.font = "26px Arial";
   gameBoardContextEl.textAlign = "center";
-  gameBoardContextEl.fillText("Game Over!", gameBoardEl.width / 2, gameBoardEl.height / 2);
+  gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
 }
 
 function checkFoodAndSnake() {
