@@ -1,164 +1,139 @@
-/*-------------- Constants -------------*/
-const boardRows = 30;
-const boardColumns = 30;
-const tileSize = 40;
-let board;
-/*---------- Variables (state) ---------*/
-// Time/Timer
-// Score
+// /*-------------- Constants -------------*/
 
-let food = { x: 0, y: 0 };
-let snake = { x: 0, y: 0 };
-let snakeMovement = { x: 0, y: 0 };
+//board
+const ROWS = 35;
+const COLUMNS = 35;
+const TILE_SIZE = 25;
+
+// /*---------- Variables (state) ---------*/
+
+//snake head
+let snake = {x: TILE_SIZE * 5, y: TILE_SIZE * 5}
 let snakeBody = [];
 
-/*----- Cached Element References  -----*/
+let snakeVelocity = {x: 0, y: 0}
+let food = {x: 0, y: 0}
 
-// querySelect start game button
+let gameOver = false;
+
+// /*----- Cached Element References  -----*/
+
 const gameBoardEl = document.getElementById("board");
-const boardContextEl = gameBoardEl.getContext("2d");
-// const cells = document.querySelectorAll(".cell");
 
-/*----------- Event Listeners ----------*/
+// allows for drawing on the canvas HTML element
+const gameBoardContextEl = gameBoardEl.getContext("2d");
+
+// /*----------- Event Listeners ----------*/
 document.addEventListener("keyup", moveSnake);
 
-// will use the keyboard for snake control, might include option to use arrow keys
-// Listen for certain keyboard keys to be entered
-// I = up
-// J = left
-// K = right
-// N = down
-
-// Listen for start button to be pressed (possibly use a keyboard key?)
-
-// Listen for pause button to be pressed (possible use keyboard key?)
-
-// Listen for one keyboard key to start, pause, and restart game?
-
-/*-------------- Functions -------------*/
 render();
 
 function render() {
-  createGameBoard();
-  fillGameBoard();
-  setSnake();
-  fillSnake();
+  createBoard();
   setFood();
-  fillFood();
-  setInterval(update, 1000 / 10);
+  setInterval(update, 1000 / 10); 
+};
 
 function update() {
-  fillGameBoard();
+  if (gameOver) {
+    return;
+  }
+  fillBoard();
   fillFood();
-  fillSnake();
+  checkFoodAndSnake();
   addSnakeBody();
-  }
+  fillSnakeBody();
+  checkForGameOverConditions();
+
 }
 
-function moveSnake(event) {
-  if (event.code === "ArrowUp") {
-    snakeMovement.x = 0;
-    snakeMovement.y = -1;
-  } else if (event.code === "ArrowDown") {
-    snakeMovement.x = 0;
-    snakeMovement.y = 1;
-  } else if (event.code === "ArrowLeft") {
-    snakeMovement.x = -1;
-    snakeMovement.y = 0;
-  } else if (event.code === "ArrowRight") {
-    snakeMovement.x = 1;
-    snakeMovement.y = 0;
-  }
+function fillBoard() {
+  gameBoardContextEl.fillStyle = "blue";
+  gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
 }
 
-function createGameBoard() {
-  gameBoardEl.height = tileSize * boardRows;
-  gameBoardEl.width = tileSize * boardColumns;
-}
-
-function fillGameBoard() {
-  boardContextEl.fillStyle = "black";
-  boardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
-}
-
-function setFood() {
-  // ensures food stays within game board
-  food.x = getRandomLocation().x;
-  food.y = getRandomLocation().y;
+function createBoard() {
+  gameBoardEl.height = ROWS * TILE_SIZE;
+  gameBoardEl.width = COLUMNS * TILE_SIZE;
 }
 
 function fillFood() {
-  boardContextEl.fillStyle = "yellow";
-  boardContextEl.fillRect(food.x, food.y, tileSize, tileSize);
+  gameBoardContextEl.fillStyle = "red";
+  gameBoardContextEl.fillRect(food.x, food.y, TILE_SIZE, TILE_SIZE);
 }
 
-// TODO: make sure setFood location and setSnake location doesn't match
-function setSnake() {
-  snake.x = getRandomLocation().x;
-  snake.y = getRandomLocation().y;
-}
-
-function fillSnake() {
-  boardContextEl.fillStyle = "green";
-  snake.x += snakeMovement.x * tileSize;
-  snake.y += snakeMovement.y * tileSize;
-  boardContextEl.fillRect(snake.x, snake.y, tileSize, tileSize);
-}
-
-function getRandomLocation() {
-  let location = { x: 0, y: 0 };
-  location.x = Math.floor(Math.random() * boardColumns) * tileSize;
-  location.y = Math.floor(Math.random() * boardRows) * tileSize;
-  return location;
-}
-
-function addSnakeBody() {
-  if (snake.x === food.x && snake.y === food.y) {
+function checkFoodAndSnake() {
+  if (snake.x == food.x && snake.y == food.y) {
     snakeBody.push([food.x, food.y]);
     setFood();
-    fillFood();
   }
 }
 
-// function setFood() {
-//   food = document.getElementById("cell-38");
-//   // food.setAttribute("class", "food");
-//   food.classList.add("food") // maybe use?
-// }
+function addSnakeBody() {
+  for (let i = snakeBody.length - 1; i > 0; i--) {
+    snakeBody[i] = snakeBody[i - 1];
+  }
+  if (snakeBody.length) {
+    snakeBody[0] = [snake.x, snake.y];
+  }
+}
 
-// function setSnake() {
-//   snake = cells[3];
-//   snake.setAttribute("class", "snake");
-// }
-// growSnake:
-// Grow snake once food is eaten
+function fillSnakeBody() {
+  gameBoardContextEl.fillStyle = "black";
+  snake.x += snakeVelocity.x * TILE_SIZE;
+  snake.y += snakeVelocity.y * TILE_SIZE;
+  gameBoardContextEl.fillRect(snake.x, snake.y, TILE_SIZE, TILE_SIZE);
+  for (let i = 0; i < snakeBody.length; i++) {
+    gameBoardContextEl.fillRect(
+      snakeBody[i][0],
+      snakeBody[i][1],
+      TILE_SIZE,
+      TILE_SIZE
+    );
+  }
+}
 
-// gameOver:
-// Freeze game board, show game over message
+function checkForGameOverConditions() {
+  if (
+    snake.x < 0 ||
+    snake.x > COLUMNS * TILE_SIZE ||
+    snake.y < 0 ||
+    snake.y > ROWS * TILE_SIZE
+  ) {
+    gameOver = true;
+    alert("Game Over");
+  }
+  // checks if snake eats itself
+  for (let i = 0; i < snakeBody.length; i++) { 
+    if (snake.x == snakeBody[i][0] && snake.y == snakeBody[i][1]) {
+      gameOver = true;
+      alert("Game Over");
+    }
+  }
 
-// showYouLose:
-// Show the message "You Lost!"
+}
 
-// showYouWin:
-// Show the meesage "You Win"
+function moveSnake(e) {
+  // && snakeVelocity statement checks to 
+  // ensure snake doesn't eat itself
+  if (e.code == "ArrowUp" && snakeVelocity.y != 1) {
+    snakeVelocity.x = 0;
+    snakeVelocity.y = -1;
+  } else if (e.code == "ArrowDown" && snakeVelocity.y != -1) {
+    snakeVelocity.x = 0;
+    snakeVelocity.y = 1;
+  } else if (e.code == "ArrowLeft" && snakeVelocity.x != 1) {
+    snakeVelocity.x = -1;
+    snakeVelocity.y = 0;
+  } else if (e.code == "ArrowRight" && snakeVelocity.x != -1) {
+    snakeVelocity.x = 1;
+    snakeVelocity.y = 0;
+  }
+}
 
-// showScore:
-// Show the current score
+function setFood() {
+  //(0-1) * cols -> (0-19.9999) -> (0-19) * 25
+  food.x = Math.floor(Math.random() * COLUMNS) * TILE_SIZE;
+  food.y = Math.floor(Math.random() * ROWS) * TILE_SIZE;
+}
 
-// updateScore:
-// When the snake "eats" update score
-
-// moveFood:
-// Move food to a random place on the grid
-
-// render():
-// Will start and restart game
-
-// • Figure out how to end game when snake hits wall
-// • Figure out how to end game when snake eats itself
-// • Figure out how to grow snake after eating
-// • Figure out how to make food disappear when snake eats food
-// • Figure out how to randomly place food on grid
-// • Figure out how to set a timer
-// • Figure out how to end game when timer ends
-// Figure out how to reset time when food is eaten
