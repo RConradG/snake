@@ -67,7 +67,14 @@ function createGameBoard() {
 }
 
 function fillGameBoard() {
-  gameBoardContextEl.fillStyle = "#1B1B1B";
+  const boardGradient = gameBoardContextEl.createLinearGradient(0, 0, 0, 170)
+  boardGradient.addColorStop(0, " #1f1b79");
+  boardGradient.addColorStop(0.25, " #4b3f97");
+  boardGradient.addColorStop(0.5, " #6a5db1");
+  boardGradient.addColorStop(0.75, " #a65fc4");
+  boardGradient.addColorStop(1, " #e76fab");
+
+  gameBoardContextEl.fillStyle = boardGradient;
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
 }
 
@@ -145,9 +152,8 @@ function setSnake() {
 function showGameOverMessage() {
   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent background
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
-
   gameBoardContextEl.fillStyle = "white";
-  gameBoardContextEl.font = "26px Arial";
+  gameBoardContextEl.font = "26px arcadeClassic, Arial";
   gameBoardContextEl.textAlign = "center";
   gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
 }
