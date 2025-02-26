@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 @font-face {
-  font-family: arcadeClassic;
-  src: url(./resources/fonts/ARCADECLASSIC.TTF)
+  font-family: "arcadeClassic";
+  src: url("./resources/fonts/ARCADECLASSIC.TTF") format("trueType")
 }
 
 
@@ -8,19 +10,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 8px;
-  font-family: arcadeClassic;
+  font-family: "Press Start 2P", Arial;
 }
 
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 80vh;
   background-color: white;
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 45px;
   text-align: center;
 }
 
@@ -36,20 +37,16 @@ h1 {
 }
 
 #reset-button {
-  font-size: 20px;
-  width: 9em;
-  border-radius: 10px;
+  font-size: 35px;
+  width: 20em;
+  border-radius: 30px;
   padding: 15px 30px;
   background-color: gold;
   cursor: pointer;
 }
 
 #reset-button:hover {
-  font-size: 26px;
+  font-size: 45px;
   border: 1px solid rgba(0.0.0.0.5);
 }
 
-/* Radial Gradient */
-.radial-gradient {
-  background: radial-gradient(circle, #1f1b79, #4b3f97, #6a5db1, #a65fc4, #e76fab);
-}

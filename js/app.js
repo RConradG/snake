@@ -1,6 +1,6 @@
 // /*-------------- Constants -------------*/
 
-//board
+// board
 const ROWS = 15;
 const COLUMNS = 15;
 const TILE_SIZE = 40;
@@ -9,8 +9,17 @@ const RESET_GAME_MESSAGE = `Game Over! Play again? Click reset button.`
 const APPLE_IMAGE = new Image();
 APPLE_IMAGE.src = "./resources/pictures/apple.jpg";
 
+const BRISKET_IMAGE = new Image();
+BRISKET_IMAGE.src = "./resources/pictures/brisket.png";
+
 const SNAKE_IMAGE = new Image();
-SNAKE_IMAGE.src = "./resources/pictures/snake-head.jpeg";
+SNAKE_IMAGE.src = "./resources/pictures/ds.png";
+
+// audio
+const resetAudio = new Audio("./resources/sounds/reset.mp3");
+const gameplayAudio = new Audio ("./resources/sounds/gameplay-music-2.mp3");
+gameplayAudio.loop = true;
+const gameOverAudio = new Audio("./resources/sounds/game-over.mp3");
 
 // /*---------- Variables (state) ---------*/
 
@@ -45,6 +54,9 @@ render();
 function render() {
   createGameBoard();
   setFood();
+  gameplayAudio.play();
+
+  // showGameStartMessage();
   gameInterval = setInterval(update, 1000 / 10);
 }
 
@@ -60,6 +72,8 @@ function update() {
   fillSnakeBody();
   checkForGameOverConditions();
 }
+
+
 
 function createGameBoard() {
   gameBoardEl.height = ROWS * TILE_SIZE;
@@ -86,7 +100,7 @@ function setFood() {
 function fillFood() {
   gameBoardContextEl.fillStyle = "red";
   gameBoardContextEl.drawImage(
-    APPLE_IMAGE,
+    BRISKET_IMAGE,
     food.x,
     food.y,
     TILE_SIZE,
@@ -141,6 +155,8 @@ function resetGame() {
   food = { x: 0, y: 0 };
   gameOver = false;
   clearInterval(gameInterval);
+  resetAudio.play();
+
   render();
 }
 
@@ -157,6 +173,15 @@ function showGameOverMessage() {
   gameBoardContextEl.textAlign = "center";
   gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
 }
+
+// function showGameStartMessage() {
+//   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent background
+//   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
+//   gameBoardContextEl.fillStyle = "white";
+//   gameBoardContextEl.font = "26px arcadeClassic, Arial";
+//   gameBoardContextEl.textAlign = "center";
+//   gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
+// }
 
 function checkForGameOverConditions() {
   if (
@@ -175,11 +200,15 @@ function checkForGameOverConditions() {
       gameOver = true;
       stopGame();
       showGameOverMessage();
+
     }
   }
 }
 
 function stopGame() {
+  removeEventListener("keyup", moveSnake);
+  gameOverAudio.play();
+  gameplayAudio.pause();
   snake = {};
 }
 
@@ -207,4 +236,3 @@ function pickRandomNumbers() {
   randomNumbers.y = Math.floor(Math.random() * ROWS) * TILE_SIZE;
   return randomNumbers;
 }
-
