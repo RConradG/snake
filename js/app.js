@@ -54,6 +54,8 @@ const resetButtonEl = document.getElementById("reset-button");
 
 const scoreElement = document.getElementById("score");
 
+const timeElement = document.getElementById("time")
+
 /*----------- Event Listeners ----------*/
 
 resetButtonEl.addEventListener("click", resetGame);
@@ -69,7 +71,6 @@ function render() {
   createGameBoard();
   setFood();
 
-
   gameInterval = setInterval(update, 1000 / 10);
 }
 
@@ -83,7 +84,17 @@ function update() {
   addSnakeBody();
   fillSnakeBody();
   checkForGameOverConditions();
+  // displayTime();
 }
+
+function displayTime() {
+  // time = setInterval(incrementTime, 1000);
+}
+
+// function incrementTime() {
+//   time++;
+//   timeElement.textContent = time;
+// }
 
 function createGameBoard() {
   gameBoardEl.height = ROWS * TILE_SIZE;
@@ -185,22 +196,13 @@ function setSnake() {
 }
 
 function showGameOverMessage() {
-  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent background
+  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // semi-transparent background
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
   gameBoardContextEl.fillStyle = "white";
   gameBoardContextEl.font = "26px arcadeClassic, Arial";
   gameBoardContextEl.textAlign = "center";
   gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
 }
-
-// function showGameStartMessage() {
-//   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent background
-//   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
-//   gameBoardContextEl.fillStyle = "white";
-//   gameBoardContextEl.font = "26px arcadeClassic, Arial";
-//   gameBoardContextEl.textAlign = "center";
-//   gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
-// }
 
 function checkForGameOverConditions() {
   if (
@@ -234,6 +236,9 @@ function moveSnake(e) {
   // && snakeVelocity statement checks to
   // ensure snake doesn't eat itself
   GAMEPLAY_AUDIO.play();
+  
+  
+
   if (e.code == "ArrowUp" && snakeVelocity.y != 1) {
     snakeVelocity.x = 0;
     snakeVelocity.y = -1;

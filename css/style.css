@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "arcadeClassic";
-  src: url("./resources/fonts/ARCADECLASSIC.TTF") format("trueType")
+  src: url("../resources/fonts/ARCADECLASSIC.TTF") format("trueType")
 }
 
 
@@ -18,6 +18,9 @@ body {
   flex-direction: column;
   justify-content: center;
   background-color: white;
+  /* align-items: center; */
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -48,5 +51,6 @@ h1 {
 #reset-button:hover {
   font-size: 45px;
   border: 1px solid rgba(0.0.0.0.5);
+
 }
 
