@@ -1,11 +1,12 @@
-// /*-------------- Constants -------------*/
+/*-------------- Constants -------------*/
 
 // board
 const ROWS = 15;
 const COLUMNS = 15;
 const TILE_SIZE = 40;
-const RESET_GAME_MESSAGE = `Game Over! Play again? Click reset button.`
+const RESET_GAME_MESSAGE = `Game Over! Play again? Click reset button.`;
 
+// images
 const APPLE_IMAGE = new Image();
 APPLE_IMAGE.src = "./resources/pictures/apple.jpg";
 
@@ -16,12 +17,19 @@ const SNAKE_IMAGE = new Image();
 SNAKE_IMAGE.src = "./resources/pictures/ds.png";
 
 // audio
-const resetAudio = new Audio("./resources/sounds/reset.mp3");
-const gameplayAudio = new Audio ("./resources/sounds/gameplay-music-2.mp3");
-gameplayAudio.loop = true;
-const gameOverAudio = new Audio("./resources/sounds/game-over.mp3");
+const RESET_AUDIO = new Audio("./resources/sounds/reset.mp3");
+RESET_AUDIO.volume = 0.45;
 
-// /*---------- Variables (state) ---------*/
+const GAMEPLAY_AUDIO = new Audio ("./resources/sounds/gameplay-music-2.mp3");
+GAMEPLAY_AUDIO.loop = true;
+GAMEPLAY_AUDIO.volume = 0.50;
+
+const GAME_OVER_AUDIO = new Audio("./resources/sounds/game-over.mp3");
+
+// misc.
+const SCORE_INCREMENT = 10;
+
+/*---------- Variables (state) ---------*/
 
 //snake head
 let snake = setSnake();
@@ -33,30 +41,35 @@ let food = { x: 0, y: 0 };
 let gameOver = false;
 let gameInterval;
 
-// /*----- Cached Element References  -----*/
+let playerScore = 0;
+let time = 0;
+
+/*----- Cached Element References  -----*/
 
 const gameBoardEl = document.getElementById("board");
 
-// allows for drawing on the canvas HTML element
 const gameBoardContextEl = gameBoardEl.getContext("2d");
 
-const resetButtonEl = document.getElementById("reset-button")
+const resetButtonEl = document.getElementById("reset-button");
 
-// /*----------- Event Listeners ----------*/
+const scoreElement = document.getElementById("score");
 
-document.addEventListener("keyup", moveSnake);
-resetButtonEl.addEventListener("click", resetGame)
+/*----------- Event Listeners ----------*/
 
-// /*------------- Functions --------------*/
+resetButtonEl.addEventListener("click", resetGame);
+
+/*------------- Functions --------------*/
 
 render();
 
 function render() {
+  // moved event listener due to audio pausing after refreshing page
+  // removed an event listener after key press, thus adding here
+  document.addEventListener("keyup", moveSnake);
   createGameBoard();
   setFood();
-  gameplayAudio.play();
 
-  // showGameStartMessage();
+
   gameInterval = setInterval(update, 1000 / 10);
 }
 
@@ -64,7 +77,6 @@ function update() {
   if (gameOver) {
     return;
   }
-  
   fillGameBoard();
   fillFood();
   checkFoodAndSnake();
@@ -72,8 +84,6 @@ function update() {
   fillSnakeBody();
   checkForGameOverConditions();
 }
-
-
 
 function createGameBoard() {
   gameBoardEl.height = ROWS * TILE_SIZE;
@@ -108,10 +118,17 @@ function fillFood() {
   );
 }
 
+function increaseScore() {
+  playerScore += SCORE_INCREMENT;
+  let scoreString = `Score: ${playerScore}`;
+  scoreElement.textContent = scoreString;
+}
+
 function checkFoodAndSnake() {
   if (snake.x == food.x && snake.y == food.y) {
     snakeBody.push([food.x, food.y]);
     setFood();
+    increaseScore();
   }
 }
 
@@ -153,9 +170,11 @@ function resetGame() {
   snakeBody = [];
   snakeVelocity = { x: 0, y: 0 };
   food = { x: 0, y: 0 };
+  playerScore = 0;
+  scoreElement.textContent = `Score: ${playerScore}`
   gameOver = false;
   clearInterval(gameInterval);
-  resetAudio.play();
+  RESET_AUDIO.play();
 
   render();
 }
@@ -200,21 +219,21 @@ function checkForGameOverConditions() {
       gameOver = true;
       stopGame();
       showGameOverMessage();
-
     }
   }
 }
 
 function stopGame() {
-  removeEventListener("keyup", moveSnake);
-  gameOverAudio.play();
-  gameplayAudio.pause();
+  document.removeEventListener("keyup", moveSnake);
+  GAME_OVER_AUDIO.play();
+  GAMEPLAY_AUDIO.pause();
   snake = {};
 }
 
 function moveSnake(e) {
   // && snakeVelocity statement checks to
   // ensure snake doesn't eat itself
+  GAMEPLAY_AUDIO.play();
   if (e.code == "ArrowUp" && snakeVelocity.y != 1) {
     snakeVelocity.x = 0;
     snakeVelocity.y = -1;
