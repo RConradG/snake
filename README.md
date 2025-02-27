@@ -2,21 +2,21 @@
 #  🐍 Snake 🐍 
 
 🐍 Snake 🐍 is a video game with a rich history. Created in 1976 and originally
-titled Blockade, this simple, monochromatic video game started as a competitive
+titled "Blockade," this simple, monochromatic video game started as a competitive
 two player game. One player needed to survive longer than the other player. The game
-underwent several versions,from 3-d but the mobile version played on the Nokia mobile
-phone greatly popularized the game. It is said to have been installed on 350
+underwent several versions,from 2-3 to 3-d, but the mobile version played on Nokia
+mobile phones popularized the game. It is said to have been installed on 350
 million Nokia phones at one point, which, despite it's simplicity, solidified 
 🐍  Snake 🐍 's place as one of the most popular video games.
 
 ## What does this 🐍 Snake 🐍 version do?
 
 My one-player version of 🐍 Snake 🐍 is quite simple. By using the arrow keys on the 
-keyboard, the player controls a "🐍 Snake 🐍" to eat food, elongating as it eats.
+keyboard, the player controls a "🐍 Snake 🐍" to eat food. The snake elongates as it eats.
 
 The player earns 10 points every time the 🐍 Snake 🐍 eats. The game also displays the
-score and high score that allow the player to keep track of the total points 
-earned prior to the game ending, and the highest score earned throughout
+score and high score that allows the player to keep track of the total points 
+earned prior to the game ending and the highest score earned throughout
 the gaming session, respectively.
 
 The 🐍 Snake 🐍 cannot hit the walls of the game board nor eat itself. If either occurs,
@@ -53,22 +53,23 @@ four keys the player uses:
 ## Here are the resources I used to research and create the game.
 
 Canvas API
+[Buc-ee's Brisket Picture](https://www.yahoo.com/lifestyle/buc-ees-gas-station-sandwiches-121532566.html)
 
-Brisket Picture
+[🐍 Snake 🐍 Head Picture](https://avatars.githubusercontent.com/u/20377140?v=4)
 
-🐍 Snake 🐍 Head Picture
+[What is 🐍 Snake 🐍?](https://www.itsnicethat.com/features/taneli-armanto-the-history-of-snake-design-legacies-230221#:~:text=Snake's%20story%20begins%20long%20before,video%20games%20company%2C%20Gremlin%20Interactive)
 
-What is 🐍 Snake 🐍?
+[History of 🐍 Snake 🐍](https://www.coolmathgames.com/blog/the-history-of-snake-the-game)
 
-History of 🐍 Snake 🐍
+[🐍 Snake 🐍 Wikipedia](https://en.wikipedia.org/wiki/Snake_(video_game_genre))
 
-🐍 Snake 🐍 Wikipedia
+[Google Fonts](https://fonts.google.com/specimen/Press+Start+2P)
 
-Google Fonts
+[Background and Text Colors](https://piktochart.com/tips/retro-80s-color-palette)
 
-Technologies Used
+# Technologies Used
 
-JavaScript, HTML, CSS, etc.
+JavaScript, HTML, CSS
 
 # Next Steps
 
