@@ -36,7 +36,7 @@ h1 {
 #game-status {
   font-size: 40px;
   display: flex;
-  width: 25em;
+  width: 60vh;
   justify-content: space-between;
 
 }
