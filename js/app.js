@@ -206,7 +206,8 @@ function setSnake() {
   return snakeLocation;
 }
 
-function showGameOverMessage() {
+async function showGameOverMessage() {
+  await document.fonts.ready;
   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // semi-transparent background
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
   gameBoardContextEl.fillStyle = "white";
