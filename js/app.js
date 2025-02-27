@@ -13,8 +13,6 @@ const TILE_SIZE = 40;
 const RESET_GAME_MESSAGE = `Game Over! Play again? Click reset button.`;
 
 // images
-const APPLE_IMAGE = new Image();
-APPLE_IMAGE.src = "./resources/pictures/apple.jpg";
 
 const BRISKET_IMAGE = new Image();
 BRISKET_IMAGE.src = "./resources/pictures/brisket.png";
@@ -49,8 +47,7 @@ let gameOver = false;
 let gameInterval;
 
 let playerScore = 0;
-let highScore;
-// localStorage.setItem("highScore", 0);
+let highScore = 0;
 
 /*----- Cached Element References  -----*/
 
@@ -78,7 +75,7 @@ function render() {
   // moved event listener due to audio pausing after refreshing page
   // removed an event listener after key press, thus adding here
   document.addEventListener("keyup", moveSnake);
-  createGameBoard();
+  setGameBoardDimensions();
   setFood();
 
   gameInterval = setInterval(update, 1000 / 10);
@@ -96,7 +93,7 @@ function update() {
   checkForGameOverConditions();
 }
 
-function createGameBoard() {
+function setGameBoardDimensions() {
   gameBoardEl.height = ROWS * TILE_SIZE;
   gameBoardEl.width = COLUMNS * TILE_SIZE;
 }
@@ -142,12 +139,8 @@ function increaseScore() {
 }
 
 function setHighScore() {
-  highScore = localStorage.getItem("highScore");
-
   if (playerScore > highScore) {
     highScore = playerScore;
-    localStorage.setItem("highScore", highScore);
-    console.log(highScore);
     highScoreElement.textContent = `High Score: ${highScore}`;
   }
 }

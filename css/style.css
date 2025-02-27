@@ -45,7 +45,8 @@ h1 {
   font-size: 35px;
   width: 20em;
   border-radius: 30px;
-  padding: 15px 30px;
+  padding: 30px 30px;
+  margin-top: 10px;
   background-color: gold;
   cursor: pointer;
 }
@@ -53,6 +54,12 @@ h1 {
 #reset-button:hover {
   font-size: 45px;
   border: 1px solid rgba(0.0.0.0.5);
+}
+
+.instructions {
+  font-size: 18px;
+  text-align: center;
+
 }
 
 .text-gradient {
