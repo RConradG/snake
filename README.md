@@ -1,6 +1,6 @@
 insert image here
 
-Snake
+# Snake
 
 Snake is a video game with a rich history. Created in 1976 and originally
 titled Blockade, this simple, monochromatic video game started as a competitive
@@ -10,7 +10,7 @@ phone greatly popularized the game. It is said to have been installed on 350
 million Nokia phones at one point, which, despite it's simplicity, solidified 
 Snake's place as one of the most popular video games.
 
-What does this Snake version do?
+## What does this Snake version do?
 
 My one-player version of Snake is quite simple. By using the arrow keys on the 
 keyboard, the player controls a "snake" to eat food, elongating as it eats.
@@ -25,14 +25,14 @@ the game ends. The player has the option of restarting the game, and to reiterat
 the highest score is kept until the user refreshes the browser, or closes the
 browser and starts a brand new session by clicking the link to the game.
 
-Why Snake?
+## Why Snake?
 
 I chose to create a version of snake for several reasons. For one, I wanted to
 learn how to make a simple video game. Secondly, I enjoy playing retro games,
 and I thought it would be incredible to create my own version. Lastly, I wanted
 to challenge myself and grow from the difficulties of creating a video game. 
 
-Getting Started
+## Getting Started
 
 Here is the link to the game.
 
@@ -49,7 +49,7 @@ insert arrow image here
 
 If the game ends, the player can restart the game by clicking the restart button.
 
-Attributions
+## Attributions
 
 Here are the resources I used to research and create the game.
 
@@ -67,14 +67,13 @@ Snake Wikipedia
 
 Google Fonts
 
-
-
 Technologies Used
 
 JavaScript, HTML, CSS, etc.
 
-Next Steps
+## Next Steps
 
-I plan on adding additional food elements for the snake to eat and snake "heads."
-For the food elements, Different food elements will randomly populate when the
-snake eats, and the snake heads will randomly change when the grame resets. 
+I plan on adding additional features and functionality in the future. I would 
+like to add different food elements for the snake to eat and snake "heads."
+I would also like to add different game modes that increase in difficulty, where
+the velocity of the snake increase as the game mode increases in difficulty.
