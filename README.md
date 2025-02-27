@@ -1,5 +1,4 @@
-insert image here
-
+![Snake Game Image](../snake/resources/pictures/snake-game.png)
 #  🐍 Snake 🐍 
 
 🐍 Snake 🐍 is a video game with a rich history. Created in 1976 and originally
@@ -25,18 +24,18 @@ the game ends. The player has the option of restarting the game, and to reiterat
 the highest score is kept until the user refreshes the browser, or closes the
 browser and starts a brand new session by clicking the link to the game.
 
-## Why 🐍 Snake 🐍?
+# Why 🐍 Snake 🐍?
 
 I chose to create a version of 🐍 Snake 🐍 for several reasons. For one, I wanted to
 learn how to make a simple video game. Secondly, I enjoy playing retro games,
 and I thought it would be incredible to create my own version. Lastly, I wanted
 to challenge myself and grow from the difficulties of creating a video game. 
 
-## Getting Started
+# Getting Started
 
-### Here is the link to the game.
+## Here is the link to the game.
 
-### Here is a link to my planning materials
+## Here is a link to my planning materials
 
 To start the game, press any arrow key.
 
@@ -47,11 +46,11 @@ four keys the player uses:
 - Left Arrow ⬅️
 - Right Arrow ➡️
 
-👉If the game ends, the player can restart the game by clicking the restart button.👈
+👉 If the game ends, the player can restart the game by clicking the restart button. 👈
 
-## Attributions
+# Attributions
 
-### Here are the resources I used to research and create the game.
+## Here are the resources I used to research and create the game.
 
 Canvas API
 
@@ -71,9 +70,9 @@ Technologies Used
 
 JavaScript, HTML, CSS, etc.
 
-## Next Steps
+# Next Steps
 
 I plan on adding additional features and functionality in the future. I would 
 like to add different food elements for the 🐍 Snake 🐍 to eat and 🐍 Snake 🐍 "heads."
-I would also like to add different game modes that increase in difficulty, where
-the velocity of the 🐍 Snake 🐍 increase as the game mode increases in difficulty.
+I would also like to add different game modes, where the velocity of the 🐍 Snake 🐍
+increases as the game mode increases in difficulty.
