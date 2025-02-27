@@ -14,9 +14,9 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  height: 70vh;
   background-color: white;
   /* align-items: center; */
   margin: 0;
@@ -30,13 +30,15 @@ h1 {
 
 #board {
   border-radius: 30px;
-}
+  height: 65vh;
 
+}
 #game-status {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;;
   font-size: 40px;
+  display: flex;
+  width: 60vh;
+  justify-content: space-between;
+
 }
 
 #reset-button {
@@ -51,6 +53,18 @@ h1 {
 #reset-button:hover {
   font-size: 45px;
   border: 1px solid rgba(0.0.0.0.5);
-
 }
+
+.text-gradient {
+  font-weight: bold;
+  text-align: center;
+  
+  color: #4b3f97;
+  background-image: radial-gradient(closest-side, #4b3f97 32%, #6a5db1 85%, #e76fab 99%);
+  
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 

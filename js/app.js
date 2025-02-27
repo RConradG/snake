@@ -1,5 +1,11 @@
 /*-------------- Constants -------------*/
 
+// font
+const FONT = new FontFace(
+  "arcadeClassic",
+  'url("../resources/fonts/ARCADECLASSIC.TTF")'
+);
+
 // board
 const ROWS = 15;
 const COLUMNS = 15;
@@ -12,6 +18,7 @@ APPLE_IMAGE.src = "./resources/pictures/apple.jpg";
 
 const BRISKET_IMAGE = new Image();
 BRISKET_IMAGE.src = "./resources/pictures/brisket.png";
+BRISKET_IMAGE.setAttribute("alt", "Brisket Sandwich");
 
 const SNAKE_IMAGE = new Image();
 SNAKE_IMAGE.src = "./resources/pictures/ds.png";
@@ -20,9 +27,9 @@ SNAKE_IMAGE.src = "./resources/pictures/ds.png";
 const RESET_AUDIO = new Audio("./resources/sounds/reset.mp3");
 RESET_AUDIO.volume = 0.45;
 
-const GAMEPLAY_AUDIO = new Audio ("./resources/sounds/gameplay-music-2.mp3");
+const GAMEPLAY_AUDIO = new Audio("./resources/sounds/gameplay-music-2.mp3");
 GAMEPLAY_AUDIO.loop = true;
-GAMEPLAY_AUDIO.volume = 0.50;
+GAMEPLAY_AUDIO.volume = 0.5;
 
 const GAME_OVER_AUDIO = new Audio("./resources/sounds/game-over.mp3");
 
@@ -42,7 +49,8 @@ let gameOver = false;
 let gameInterval;
 
 let playerScore = 0;
-let time = 0;
+let highScore;
+// localStorage.setItem("highScore", 0);
 
 /*----- Cached Element References  -----*/
 
@@ -54,7 +62,9 @@ const resetButtonEl = document.getElementById("reset-button");
 
 const scoreElement = document.getElementById("score");
 
-const timeElement = document.getElementById("time")
+const highScoreElement = document.getElementById("high-score");
+
+const timeElement = document.getElementById("time");
 
 /*----------- Event Listeners ----------*/
 
@@ -84,17 +94,7 @@ function update() {
   addSnakeBody();
   fillSnakeBody();
   checkForGameOverConditions();
-  // displayTime();
 }
-
-function displayTime() {
-  // time = setInterval(incrementTime, 1000);
-}
-
-// function incrementTime() {
-//   time++;
-//   timeElement.textContent = time;
-// }
 
 function createGameBoard() {
   gameBoardEl.height = ROWS * TILE_SIZE;
@@ -102,7 +102,13 @@ function createGameBoard() {
 }
 
 function fillGameBoard() {
-  const boardGradient = gameBoardContextEl.createLinearGradient(0, 0, 0, 170)
+  const boardGradient = gameBoardContextEl.createLinearGradient(
+    gameBoardEl.width,
+    0,
+    gameBoardEl.width,
+    gameBoardEl.height
+  );
+
   boardGradient.addColorStop(0, " #1f1b79");
   boardGradient.addColorStop(0.25, " #4b3f97");
   boardGradient.addColorStop(0.5, " #6a5db1");
@@ -135,11 +141,23 @@ function increaseScore() {
   scoreElement.textContent = scoreString;
 }
 
+function setHighScore() {
+  highScore = localStorage.getItem("highScore");
+
+  if (playerScore > highScore) {
+    highScore = playerScore;
+    localStorage.setItem("highScore", highScore);
+    console.log(highScore);
+    highScoreElement.textContent = `High Score: ${highScore}`;
+  }
+}
+
 function checkFoodAndSnake() {
   if (snake.x == food.x && snake.y == food.y) {
     snakeBody.push([food.x, food.y]);
     setFood();
     increaseScore();
+    setHighScore();
   }
 }
 
@@ -166,14 +184,14 @@ function fillSnakeBody() {
   for (let i = 0; i < snakeBody.length; i++) {
     gameBoardContextEl.beginPath();
     gameBoardContextEl.arc(
-      snakeBody[i][0] + TILE_SIZE / 2,  // Center X
-      snakeBody[i][1] + TILE_SIZE / 2,  // Center Y
-      TILE_SIZE / 2,  // Radius
-      0, Math.PI * 2  // Full circle
+      snakeBody[i][0] + TILE_SIZE / 2, // Center X
+      snakeBody[i][1] + TILE_SIZE / 2, // Center Y
+      TILE_SIZE / 2, // Radius
+      0,
+      Math.PI * 2 // Full circle
     );
     gameBoardContextEl.fill();
   }
-  
 }
 
 function resetGame() {
@@ -182,7 +200,7 @@ function resetGame() {
   snakeVelocity = { x: 0, y: 0 };
   food = { x: 0, y: 0 };
   playerScore = 0;
-  scoreElement.textContent = `Score: ${playerScore}`
+  scoreElement.textContent = `Score: ${playerScore}`;
   gameOver = false;
   clearInterval(gameInterval);
   RESET_AUDIO.play();
@@ -191,7 +209,7 @@ function resetGame() {
 }
 
 function setSnake() {
-  let snakeLocation = {x: pickRandomNumbers().x, y: pickRandomNumbers().y};
+  let snakeLocation = { x: pickRandomNumbers().x, y: pickRandomNumbers().y };
   return snakeLocation;
 }
 
@@ -201,7 +219,11 @@ function showGameOverMessage() {
   gameBoardContextEl.fillStyle = "white";
   gameBoardContextEl.font = "26px arcadeClassic, Arial";
   gameBoardContextEl.textAlign = "center";
-  gameBoardContextEl.fillText(RESET_GAME_MESSAGE, gameBoardEl.width/2 , gameBoardEl.height/2);
+  gameBoardContextEl.fillText(
+    RESET_GAME_MESSAGE,
+    gameBoardEl.width / 2,
+    gameBoardEl.height / 2
+  );
 }
 
 function checkForGameOverConditions() {
@@ -213,14 +235,20 @@ function checkForGameOverConditions() {
   ) {
     gameOver = true;
     stopGame();
-    showGameOverMessage();
+    FONT.load().then(() => {
+      document.fonts.add(FONT);
+      showGameOverMessage();
+    });
   }
   // checks if snake eats itself
   for (let i = 0; i < snakeBody.length; i++) {
     if (snake.x == snakeBody[i][0] && snake.y == snakeBody[i][1]) {
       gameOver = true;
       stopGame();
-      showGameOverMessage();
+      FONT.load().then(() => {
+        document.fonts.add(FONT);
+        showGameOverMessage();
+      });
     }
   }
 }
@@ -236,8 +264,6 @@ function moveSnake(e) {
   // && snakeVelocity statement checks to
   // ensure snake doesn't eat itself
   GAMEPLAY_AUDIO.play();
-  
-  
 
   if (e.code == "ArrowUp" && snakeVelocity.y != 1) {
     snakeVelocity.x = 0;
@@ -255,7 +281,7 @@ function moveSnake(e) {
 }
 
 function pickRandomNumbers() {
-  let randomNumbers = {x: 0, y: 0};
+  let randomNumbers = { x: 0, y: 0 };
   randomNumbers.x = Math.floor(Math.random() * COLUMNS) * TILE_SIZE;
   randomNumbers.y = Math.floor(Math.random() * ROWS) * TILE_SIZE;
   return randomNumbers;
