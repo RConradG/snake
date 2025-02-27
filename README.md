@@ -9,7 +9,7 @@ mobile phones popularized the game. It is said to have been installed on 350
 million Nokia phones at one point, which, despite it's simplicity, solidified 
 🐍  Snake 🐍 's place as one of the most popular video games.
 
-## What does this 🐍 Snake 🐍 version do?
+# What does this 🐍 Snake 🐍 version do?
 
 My one-player version of 🐍 Snake 🐍 is quite simple. By using the arrow keys on the 
 keyboard, the player controls a "🐍 Snake 🐍" to eat food. The snake elongates as it eats.
@@ -31,11 +31,13 @@ learn how to make a simple video game. Secondly, I enjoy playing retro games,
 and I thought it would be incredible to create my own version. Lastly, I wanted
 to challenge myself and grow from the difficulties of creating a video game. 
 
+![Client vs. Designer Image](/resources/pictures/client%20-vs-designer.gif)
+
 # Getting Started
 
-## Here is the link to the game.
+### Here is the link to the game.
 
-## Here is a link to my planning materials
+### Here is a link to my planning materials
 
 To start the game, press any arrow key.
 
@@ -50,9 +52,12 @@ four keys the player uses:
 
 # Attributions
 
-## Here are the resources I used to research and create the game.
+### Here are the resources I used to research and create the game.
 
-Canvas API
+[Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+
+[Drawing on Canvas](https://www.w3schools.com/graphics/canvas_drawing.asp)
+
 [Buc-ee's Brisket Picture](https://www.yahoo.com/lifestyle/buc-ees-gas-station-sandwiches-121532566.html)
 
 [🐍 Snake 🐍 Head Picture](https://avatars.githubusercontent.com/u/20377140?v=4)
