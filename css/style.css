@@ -31,12 +31,12 @@ h1 {
 #board {
   border-radius: 30px;
   height: 65vh;
-
 }
+
 #game-status {
   font-size: 40px;
   display: flex;
-  width: 60vh;
+  width: 25em;
   justify-content: space-between;
 
 }
