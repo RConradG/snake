@@ -1,10 +1,10 @@
 /*-------------- Constants -------------*/
 
 // font
-const FONT = new FontFace(
-  "arcadeClassic",
-  'url("../resources/fonts/ARCADECLASSIC.TTF")'
-);
+// const FONT = new FontFace(
+//   "arcadeClassic",
+//   'url("../resources/fonts/ARCADECLASSIC.TTF")'
+// );
 
 // board
 const ROWS = 15;
@@ -206,8 +206,8 @@ function setSnake() {
   return snakeLocation;
 }
 
-async function showGameOverMessage() {
-  await document.fonts.ready;
+function showGameOverMessage() {
+  
   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // semi-transparent background
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
   gameBoardContextEl.fillStyle = "white";
@@ -229,9 +229,9 @@ function checkForGameOverConditions() {
   ) {
     gameOver = true;
     stopGame();
+    showGameOverMessage();
     FONT.load().then(() => {
       document.fonts.add(FONT);
-      showGameOverMessage();
     });
   }
   // checks if snake eats itself
