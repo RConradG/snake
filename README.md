@@ -1,4 +1,4 @@
-![Snake Game Image](../snake/resources/pictures/snake-game.png)
+![Snake Game Image]("../resources/pictures/snake-game.png")
 #  🐍 Snake 🐍 
 
 🐍 Snake 🐍 is a video game with a rich history. Created in 1976 and originally
