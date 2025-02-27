@@ -210,7 +210,7 @@ function showGameOverMessage() {
   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // semi-transparent background
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
   gameBoardContextEl.fillStyle = "white";
-  gameBoardContextEl.font = "26px arcadeClassic, Arial";
+  gameBoardContextEl.font = "26px Arial";
   gameBoardContextEl.textAlign = "center";
   gameBoardContextEl.fillText(
     RESET_GAME_MESSAGE,
