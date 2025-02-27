@@ -230,9 +230,9 @@ function checkForGameOverConditions() {
     gameOver = true;
     stopGame();
     showGameOverMessage();
-    FONT.load().then(() => {
-      document.fonts.add(FONT);
-    });
+    // FONT.load().then(() => {
+    //   document.fonts.add(FONT);
+    // });
   }
   // checks if snake eats itself
   for (let i = 0; i < snakeBody.length; i++) {
