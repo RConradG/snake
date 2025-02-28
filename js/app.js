@@ -63,7 +63,6 @@ const scoreElement = document.getElementById("score");
 
 const highScoreElement = document.getElementById("high-score");
 
-const timeElement = document.getElementById("time");
 
 /*----------- Event Listeners ----------*/
 
