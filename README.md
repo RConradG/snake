@@ -12,7 +12,7 @@ million Nokia phones at one point, which, despite it's simplicity, solidified
 # What does this 🐍 Snake 🐍 version do?
 
 My one-player version of 🐍 Snake 🐍 is quite simple. By using the arrow keys on the 
-keyboard, the player controls a "🐍 Snake 🐍" to eat food. The snake elongates as it eats.
+keyboard, the player controls a "🐍 Snake 🐍" to eat food, and the snake elongates as it eats.
 
 The player earns 10 points every time the 🐍 Snake 🐍 eats. The game also displays the
 score and high score that allows the player to keep track of the total points 
@@ -35,9 +35,9 @@ to challenge myself and grow from the difficulties of creating a video game.
 
 # Getting Started
 
-### Here is the link to the game.
+### [Here is the link to the game.](https://rconradg.github.io/snake/)
 
-### Here is a link to my planning materials
+### [Here is a link to my planning materials](/snake-browser-game-proposal.pdf)
 
 To start the game, press any arrow key.
 
