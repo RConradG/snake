@@ -31,7 +31,7 @@ learn how to make a simple video game. Secondly, I enjoy playing retro games,
 and I thought it would be incredible to create my own version. Lastly, I wanted
 to challenge myself and grow from the difficulties of creating a video game. 
 
-![Client vs. Designer Image](/resources/pictures/client%20-vs-designer.gif)
+![Client vs. Designer Image](/resources/pictures/client-vs-designer.gif)
 
 # Getting Started
 
