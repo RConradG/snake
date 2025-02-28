@@ -6,6 +6,10 @@ const FONT = new FontFace(
   'url("ARCADECLASSIC.TTF")'
 );
 
+FONT.load().then(() => {
+  document.fonts.add(FONT);
+});
+
 // board
 const ROWS = 15;
 const COLUMNS = 15;
@@ -207,13 +211,10 @@ function setSnake() {
 }
 
 function showGameOverMessage() {
-  FONT.load().then(() => {
-    document.style.fonts.add(FONT);
-  })
   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // semi-transparent background
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
   gameBoardContextEl.fillStyle = "white";
-  gameBoardContextEl.font = "26px Arial";
+  gameBoardContextEl.font = "26px arcadeClassic, Arial";
   gameBoardContextEl.textAlign = "center";
   gameBoardContextEl.fillText(
     RESET_GAME_MESSAGE,
@@ -232,19 +233,13 @@ function checkForGameOverConditions() {
     gameOver = true;
     stopGame();
     showGameOverMessage();
-    // FONT.load().then(() => {
-    //   document.fonts.add(FONT);
-    // });
   }
   // checks if snake eats itself
   for (let i = 0; i < snakeBody.length; i++) {
     if (snake.x == snakeBody[i][0] && snake.y == snakeBody[i][1]) {
       gameOver = true;
       stopGame();
-      FONT.load().then(() => {
-        document.fonts.add(FONT);
-        showGameOverMessage();
-      });
+      showGameOverMessage();
     }
   }
 }
