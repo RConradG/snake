@@ -2,8 +2,8 @@
 
 // font
 const FONT = new FontFace(
-  "arcadeClassic",
-  'url("ARCADECLASSIC.TTF")'
+  "ArcadeClassic",
+  'url("./resources/fonts/ARCADECLASSIC.TTF")'
 );
 
 FONT.load().then(() => {
