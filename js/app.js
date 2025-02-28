@@ -3,7 +3,7 @@
 // font
 const FONT = new FontFace(
   "arcadeClassic",
-  'url("../resources/fonts/ARCADECLASSIC.TTF")'
+  'url("ARCADECLASSIC.TTF")'
 );
 
 // board
@@ -207,7 +207,9 @@ function setSnake() {
 }
 
 function showGameOverMessage() {
-  
+  FONT.load().then(() => {
+    document.style.fonts.add(FONT);
+  })
   gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // semi-transparent background
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
   gameBoardContextEl.fillStyle = "white";
