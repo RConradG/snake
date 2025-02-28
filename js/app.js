@@ -5,10 +5,10 @@ const FONT = new FontFace(
   "ArcadeClassic",
   'url("./resources/fonts/ARCADECLASSIC.TTF")'
 );
-
 FONT.load().then(() => {
   document.fonts.add(FONT);
 });
+
 // board
 const ROWS = 15;
 const COLUMNS = 15;
@@ -16,7 +16,6 @@ const TILE_SIZE = 40;
 const RESET_GAME_MESSAGE = `Game Over! Play again? Click reset button.`;
 
 // images
-
 const BRISKET_IMAGE = new Image();
 BRISKET_IMAGE.src = "./resources/pictures/brisket.png";
 BRISKET_IMAGE.setAttribute("alt", "Brisket Sandwich");
@@ -210,11 +209,11 @@ function setSnake() {
 }
 
 function showGameOverMessage() {
-  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; 
+  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)";
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
-  
+
   gameBoardContextEl.fillStyle = "white";
-  gameBoardContextEl.font = "26px ArcadeClassic"; 
+  gameBoardContextEl.font = "26px ArcadeClassic";
   gameBoardContextEl.textAlign = "center";
   gameBoardContextEl.fillText(
     RESET_GAME_MESSAGE,
@@ -222,7 +221,6 @@ function showGameOverMessage() {
     gameBoardEl.height / 2
   );
 }
-
 
 function checkForGameOverConditions() {
   if (
