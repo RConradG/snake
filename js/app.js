@@ -9,7 +9,6 @@ const FONT = new FontFace(
 FONT.load().then(() => {
   document.fonts.add(FONT);
 });
-
 // board
 const ROWS = 15;
 const COLUMNS = 15;
@@ -211,10 +210,11 @@ function setSnake() {
 }
 
 function showGameOverMessage() {
-  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; // semi-transparent background
+  gameBoardContextEl.fillStyle = "rgba(0, 0, 0, 0.5)"; 
   gameBoardContextEl.fillRect(0, 0, gameBoardEl.width, gameBoardEl.height);
+  
   gameBoardContextEl.fillStyle = "white";
-  gameBoardContextEl.font = "26px arcadeClassic, Arial";
+  gameBoardContextEl.font = "26px ArcadeClassic"; 
   gameBoardContextEl.textAlign = "center";
   gameBoardContextEl.fillText(
     RESET_GAME_MESSAGE,
@@ -222,6 +222,7 @@ function showGameOverMessage() {
     gameBoardEl.height / 2
   );
 }
+
 
 function checkForGameOverConditions() {
   if (
@@ -239,7 +240,6 @@ function checkForGameOverConditions() {
     if (snake.x == snakeBody[i][0] && snake.y == snakeBody[i][1]) {
       gameOver = true;
       stopGame();
-      showGameOverMessage();
     }
   }
 }
