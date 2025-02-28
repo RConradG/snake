@@ -52,7 +52,7 @@ four keys the player uses:
 
 # Attributions
 
-### Here are the resources I used to research and create the game.
+### Here are the resources I researched to create the game.
 
 [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
 
