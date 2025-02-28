@@ -17,7 +17,7 @@ body {
   display: grid;
   place-items: center;
   height: 70vh;
-  background-color: white;
+  background-color: black;
   margin: 0;
   padding: 0;
 }
@@ -35,6 +35,7 @@ h1 {
 
 #game-status {
   font-size: 40px;
+  color: white;
   display: flex;
   width: 70vh;
   justify-content: space-between;
@@ -59,6 +60,7 @@ h1 {
 .instructions {
   font-size: 18px;
   text-align: center;
+  color: white;
 
 }
 
